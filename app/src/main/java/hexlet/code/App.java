@@ -11,24 +11,21 @@ import java.nio.file.Files;
 import java.security.MessageDigest;
 import java.util.concurrent.Callable;
 
-@Command(name = "checksum", mixinStandardHelpOptions = true, version = "checksum 4.0",
-        description = "Prints the checksum (SHA-256 by default) of a file to STDOUT.")
+    @Command(name = "gendiff", mixinStandardHelpOptions = true,
+        description = "Compares two configuration files and shows a difference.")
 
 public class App implements Callable<Integer> {
+    @Parameters(index = "0", paramLabel = "filepath1", description = "path to first file")
+    private String filepath1;
 
-    @Parameters(index = "0", description = "The file whose checksum to calculate.")
-    private File file;
+    @Parameters(index = "1", paramLabel = "filepath2", description = "path to second file")
+    private String filepath2;
 
-    @Option(names = {"-a", "--algorithm"}, description = "MD5, SHA-1, SHA-256, ...")
-    private String algorithm = "SHA-256";
+    @Option(names = {"-f", "--format"}, paramLabel = "format", description = "output format: stylish")
+    private String format;
 
     @Override
-    public Integer call() throws Exception { // your business logic goes here...
-        byte[] fileContents = Files.readAllBytes(file.toPath());
-        byte[] digest = MessageDigest.getInstance(algorithm).digest(fileContents);
-        System.out.printf("%0" + (digest.length*2) + "x%n", new BigInteger(1, digest));
-        return 0;
-    }
+    public final Integer call() throws Exception {return null;}
 
     public static void main(String[] args) {
         int exitCode = new CommandLine(new App()).execute(args);
