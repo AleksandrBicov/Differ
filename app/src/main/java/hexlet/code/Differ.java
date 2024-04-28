@@ -5,7 +5,10 @@ import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class Differ {
 
@@ -18,7 +21,7 @@ public class Differ {
                 throw new IOException("File not found: " + filepath);
             }
             String content = new String(inputStream.readAllBytes());
-            return gson.fromJson(content, new TypeToken <Map <String, Object> > (){}.getType());
+            return gson.fromJson(content, new TypeToken<Map<String, Object>>() { } .getType());
         }
     }
 
