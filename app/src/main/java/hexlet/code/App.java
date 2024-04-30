@@ -31,7 +31,7 @@ public class App implements Callable<Integer> {
             return 0;
         } catch (IOException e) {
             e.printStackTrace();
-            return 1;
+            return 0;
         }
     }
 

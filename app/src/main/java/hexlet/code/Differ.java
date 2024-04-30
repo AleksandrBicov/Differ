@@ -4,7 +4,9 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
-import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
@@ -14,66 +16,93 @@ public class Differ {
 
     private Gson gson = new Gson();
 
-    private Map<String, Object> readJsonFile(String filepath) throws IOException {
-        ClassLoader classLoader = getClass().getClassLoader();
-        try (InputStream inputStream = classLoader.getResourceAsStream(filepath)) {
-            if (inputStream == null) {
-                throw new IOException("File not found: " + filepath);
-            }
-            String content = new String(inputStream.readAllBytes());
-            return gson.fromJson(content, new TypeToken<Map<String, Object>>() { } .getType());
+    private Map<String, String> readJsonFile(String filepath) throws IOException {
+        Path path = Paths.get("src", "main", "resources", filepath)
+                .toAbsolutePath().normalize();
+        if (!Files.exists(path)) {
+            throw new IOException("File not found: " + filepath);
         }
+        String content = new String(Files.readAllBytes(path));
+        return gson.fromJson(content, new TypeToken<Map<String, String>>() { } .getType());
     }
 
     public String generateDiff(String filepath1, String filepath2) throws IOException {
-        Map<String, Object> map1 = readJsonFile(filepath1);
-        Map<String, Object> map2 = readJsonFile(filepath2);
-        Map<String, Object[]> diff = compareMaps(map1, map2);
+        Map<String, String> map1 = readJsonFile(filepath1);
+        Map<String, String> map2 = readJsonFile(filepath2);
+        Map<String, String[]> diff = compareMaps(map1, map2);
         return formatDiff(diff);
     }
 
-    private Map<String, Object[]> compareMaps(Map<String, Object> map1, Map<String, Object> map2) {
-        Map<String, Object[]> diff = new LinkedHashMap<>();
+    /**
+     * Сравнивает два Map и возвращает Map с различиями.
+     *
+     * @param map1 Первый Map для сравнения.
+     * @param map2 Второй Map для сравнения.
+     * @return Map с различиями, где ключ - это ключ из обоих Map, а значение - массив из двух элементов:
+     *         - значение из первого Map
+     *         - значение из второго Map
+     */
+    private Map<String, String[]> compareMaps(Map<String, String> map1, Map<String, String> map2) {
+        Map<String, String[]> diff = new LinkedHashMap<>();
 
+        // Объединяем ключи из обоих Map
         Set<String> allKeys = new TreeSet<>(map1.keySet());
         allKeys.addAll(map2.keySet());
 
         for (String key : allKeys) {
-            Object value1 = map1.get(key);
-            Object value2 = map2.get(key);
+            String value1 = map1.get(key);
+            String value2 = map2.get(key);
 
-            if (value1 == null || value2 == null) {
-                // Если значение отсутствует в одном из файлов, добавляем его в diff
-                diff.put(key, new Object[]{value1, value2});
-            } else if (value1.equals(value2)) {
-                // Если значения совпадают, добавляем ключ без изменений
-                diff.put(key, new Object[]{value1, value1});
-            } else {
-                // Если значения не совпадают, добавляем их в diff
-                diff.put(key, new Object[]{value1, value2});
+            // Если значение отсутствует в первом Map
+            if (value1 == null) {
+                diff.put(key, new String[]{null, value2});
+
+            } else if (value2 == null) { // Если значение отсутствует во втором Map
+                diff.put(key, new String[]{value1, null});
+
+            } else if (value1.equals(value2)) { // Если значения совпадают
+                diff.put(key, new String[]{value1, value1});
+
+            } else { // Если значения не совпадают
+                diff.put(key, new String[]{value1, value2});
             }
         }
 
         return diff;
     }
 
-    private String formatDiff(Map<String, Object[]> diff) {
+    /**
+     * Форматирует Map с различиями в виде строки.
+     *
+     * @param diff Map с различиями, где ключ - это ключ из обоих Map, а значение - массив из двух элементов:
+     *             - значение из первого Map
+     *             - значение из второго Map
+     * @return Отформатированная строка с различиями.
+     */
+    private String formatDiff(Map<String, String[]> diff) {
         StringBuilder sb = new StringBuilder();
         sb.append("{\n");
-        for (Map.Entry<String, Object[]> entry : diff.entrySet()) {
+
+        for (var entry : diff.entrySet()) {
             String key = entry.getKey();
-            Object[] values = entry.getValue();
+            String[] values = entry.getValue();
+
+            // Если значение было добавлено во второй Map
             if (values[0] == null) {
                 sb.append("  + ").append(key).append(": ").append(values[1]).append("\n");
-            } else if (values[1] == null) {
+
+            } else if (values[1] == null) { // Если значение было удалено из первого Map
                 sb.append("  - ").append(key).append(": ").append(values[0]).append("\n");
-            } else if (values[0].equals(values[1])) {
+
+            } else if (values[0].equals(values[1])) { // Если значения не изменились
                 sb.append("    ").append(key).append(": ").append(values[0]).append("\n");
-            } else {
+
+            } else { // Если значение было изменено
                 sb.append("  - ").append(key).append(": ").append(values[0]).append("\n");
                 sb.append("  + ").append(key).append(": ").append(values[1]).append("\n");
             }
         }
+
         sb.append("}");
         return sb.toString();
     }
