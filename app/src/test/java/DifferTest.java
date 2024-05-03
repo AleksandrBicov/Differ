@@ -13,7 +13,7 @@ import java.nio.file.Files;
 
 
 public class DifferTest {
-    private static String resultJson;
+    private static String expected;
 
     private static String read(String fileName) throws Exception {
         Path path = Paths.get("src", "test", "resources", fileName)
@@ -22,14 +22,20 @@ public class DifferTest {
     }
     @BeforeAll
     public static void beforeAll() throws Exception {
-        resultJson = read("result_json");
+        expected = read("result");
     }
 
     @Test
     public void testRightComparisonFormatJSON() throws Exception {
         Differ differ = new Differ();
         String result = differ.generateDiff("filepath1.json", "filepath2.json");
-        assertEquals(resultJson, result);
+        assertEquals(DifferTest.expected, result);
+    }
+    @Test
+    public void testRightComparisonFormatYML() throws Exception {
+        Differ differ = new Differ();
+        String result = differ.generateDiff("filepath1.yml", "filepath2.yml");
+        assertEquals(DifferTest.expected, result);
     }
     @Test
     public void testInvalidJsonFormat() {

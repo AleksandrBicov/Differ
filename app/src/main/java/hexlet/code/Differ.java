@@ -1,12 +1,6 @@
 package hexlet.code;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
@@ -14,21 +8,9 @@ import java.util.TreeSet;
 
 public class Differ {
 
-    private Gson gson = new Gson();
-
-    private Map<String, String> readJsonFile(String filepath) throws IOException {
-        Path path = Paths.get("src", "main", "resources", filepath)
-                .toAbsolutePath().normalize();
-        if (!Files.exists(path)) {
-            throw new IOException("File not found: " + filepath);
-        }
-        String content = new String(Files.readAllBytes(path));
-        return gson.fromJson(content, new TypeToken<Map<String, String>>() { } .getType());
-    }
-
     public String generateDiff(String filepath1, String filepath2) throws IOException {
-        Map<String, String> map1 = readJsonFile(filepath1);
-        Map<String, String> map2 = readJsonFile(filepath2);
+        Map<String, String> map1 = Parser.readFile(filepath1);
+        Map<String, String> map2 = Parser.readFile(filepath2);
         Map<String, String[]> diff = compareMaps(map1, map2);
         return formatDiff(diff);
     }

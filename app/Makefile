@@ -1,9 +1,9 @@
 build:
-	./gradlew clean build
+	./gradlew clean install build
 install:
 	./gradlew clean install
-run:
-	./build/install/app/bin/app
+#run:
+#	./build/install/app/bin/app
 clean:
 	./gradlew clean
 lint:
