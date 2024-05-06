@@ -4,6 +4,10 @@ install:
 	./gradlew clean install
 #run:
 #	./build/install/app/bin/app
+buildJ:
+	./build/install/app/bin/app filepath1.json filepath2.json
+buildY:
+	./build/install/app/bin/app filepath1.yml filepath2.yml
 clean:
 	./gradlew clean
 lint:
