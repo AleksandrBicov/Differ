@@ -21,11 +21,6 @@ public class Stylish {
             Object value1 = values[0];
             Object value2 = values[1];
             // Если значение отсутствует в первом Map
-//            if (value1 == null && value2 != null) {
-//                sb.append("  + ").append(key).append(": ").append("null").append("\n");
-//            } else if (value2 == null && value1 != null){
-//                sb.append("  - ").append(key).append(": ").append("null").append("\n");
-//            }
             if (value1 == null) {
                 sb.append("  + ").append(key).append(": ").append(value2).append("\n");
             } else if (value2 == null) { // Если значение отсутствует во втором Map
