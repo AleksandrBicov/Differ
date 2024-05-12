@@ -1,5 +1,8 @@
 package hexlet.code;
 
+import hexlet.code.formatters.Plain;
+import hexlet.code.formatters.Stylish;
+
 import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -18,7 +21,7 @@ public class Differ {
     }
 
     /**
-     * Генерирует отчет о различиях между двумя файлами в формате JSON.
+     * Генерирует отчет о различиях между двумя файлами.
      *
      * @param filepath1 Путь к первому файлу.
      * @param filepath2 Путь ко второму файлу.
@@ -29,7 +32,7 @@ public class Differ {
         Map<String, Object> map1 = Parser.readFile(filepath1);
         Map<String, Object> map2 = Parser.readFile(filepath2);
         Map<String, Object[]> diff = compareMaps(map1, map2);
-        return Stylish.stylish(diff);
+        return Formatter.format(format,diff);
     }
 
     /**
@@ -42,8 +45,19 @@ public class Differ {
      *         - значение из второго Map
      */
     private Map<String, Object[]> compareMaps(Map<String, Object> map1, Map<String, Object> map2) {
+        // Проверяем значения Map на null
+        // и если таковые встречаются заменяем их на String "null"
+        map1.forEach((key, value) -> {
+            if (value == null) {
+                map1.put(key, "null");
+            }
+        });
+        map2.forEach((key, value) -> {
+            if (value == null) {
+                map2.put(key, "null");
+            }
+        });
         Map<String, Object[]> diff = new LinkedHashMap<>();
-
         // Объединяем ключи из обоих Map
         Set<String> allKeys = new TreeSet<>(map1.keySet());
         allKeys.addAll(map2.keySet());
