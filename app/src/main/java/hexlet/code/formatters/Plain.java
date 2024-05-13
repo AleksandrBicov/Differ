@@ -13,11 +13,14 @@ public class Plain {
             Object value2 = values[1];
 
             if (value1 == null) {
-                sb.append("Property '").append(key).append("' was added with value: ").append(formatValue(value2)).append("\n");
+                sb.append("Property '").append(key).
+                        append("' was added with value: ").append(formatValue(value2)).append("\n");
             } else if (value2 == null) {
                 sb.append("Property '").append(key).append("' was removed\n");
             } else if (!value1.equals(value2)) {
-                sb.append("Property '").append(key).append("' was updated. From ").append(formatValue(value1)).append(" to ").append(formatValue(value2)).append("\n");
+                sb.append("Property '").append(key).append("' was updated. From ").
+                        append(formatValue(value1)).append(" to ").
+                        append(formatValue(value2)).append("\n");
             }
         }
 

@@ -1,8 +1,5 @@
 package hexlet.code;
 
-import hexlet.code.formatters.Plain;
-import hexlet.code.formatters.Stylish;
-
 import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -32,10 +29,10 @@ public class Differ {
         Map<String, Object> map1 = Parser.readFile(filepath1);
         Map<String, Object> map2 = Parser.readFile(filepath2);
         Map<String, Object[]> diff = compareMaps(map1, map2);
-        return Formatter.format(format,diff);
+        return Formatter.format(format, diff);
     }
 
-    /**
+     /**
      * Сравнивает два Map и возвращает Map с различиями.
      *
      * @param map1 Первый Map для сравнения.

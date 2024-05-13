@@ -2,8 +2,8 @@ build:
 	./gradlew clean install build
 install:
 	./gradlew clean install
-#run:
-#	./build/install/app/bin/app
+buildj:
+	./build/install/app/bin/app -f json filepath1.json filepath2.json
 buildJ:
 	./build/install/app/bin/app filepath1.json filepath2.json
 buildp:
