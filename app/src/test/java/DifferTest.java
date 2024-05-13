@@ -1,46 +1,51 @@
 import hexlet.code.Differ;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.Files;
 
 
 public class DifferTest {
-    private static String expected;
-
-    private static String read(String fileName) throws Exception {
-        Path path = Paths.get("src", "test", "resources", fileName)
-                .toAbsolutePath().normalize();
-        return Files.readString(path).trim();
-    }
-    @BeforeAll
-    public static void beforeAll() throws Exception {
-        expected = read("result");
+    private String readExpectedResult(String filename) throws Exception {
+        return new String(Files.readAllBytes(Paths.get("src/test/resources", filename)));
     }
 
     @Test
-    public void testRightComparisonFormatJSON() throws Exception {
-        Differ differ = new Differ();
-        String result = differ.generateDiff("filepath1.json", "filepath2.json");
-        assertEquals(DifferTest.expected, result);
+    public void testGenerateDiffStylish() throws Exception {
+        String filepath1 = "filepath1.json";
+        String filepath2 = "filepath2.json";
+        String expected = readExpectedResult("stylish.expected");
+
+        Differ differ = new Differ("stylish");
+        String actual = differ.generateDiff(filepath1, filepath2);
+
+        assertEquals(expected, actual);
     }
+
     @Test
-    public void testRightComparisonFormatYML() throws Exception {
-        Differ differ = new Differ();
-        String result = differ.generateDiff("filepath1.yml", "filepath2.yml");
-        assertEquals(DifferTest.expected, result);
+    public void testGenerateDiffPlain() throws Exception {
+        String filepath1 = "filepath1.json";
+        String filepath2 = "filepath2.json";
+        String expected = readExpectedResult("plain.expected");
+
+        Differ differ = new Differ("plain");
+        String actual = differ.generateDiff(filepath1, filepath2);
+
+        assertEquals(expected, actual);
     }
+
     @Test
-    public void testInvalidJsonFormat() {
-        Differ differ = new Differ();
-        assertThrows(IOException.class, () -> differ.generateDiff("invalid_json1.json", "filepath2.json"));
-        assertThrows(IOException.class, () -> differ.generateDiff("filepath1.json", "invalid_json2.json"));
+    public void testGenerateDiffJson() throws Exception {
+        String filepath1 = "filepath1.json";
+        String filepath2 = "filepath2.json";
+        String expected = readExpectedResult("json.expected");
+
+        Differ differ = new Differ("json");
+        String actual = differ.generateDiff(filepath1, filepath2);
+
+        assertEquals(expected, actual);
     }
 }
