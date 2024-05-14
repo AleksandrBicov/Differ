@@ -1,19 +1,36 @@
-build:
-	./gradlew clean install build
-install:
-	./gradlew clean install
-buildJson:
-	./build/install/app/bin/app filepath1.json filepath2.json
-buildYml:
-	./build/install/app/bin/app filepath1.yml filepath2.yml
-buildPlain:
-	./build/install/app/bin/app -f plain filepath1.json filepath2.json
-buildJ:
-	./build/install/app/bin/app -f json filepath1.json filepath2.json
+.DEFAULT_GOAL := build-run
+
+setup:
+	./gradlew wrapper --gradle-version 8.5
+
 clean:
 	./gradlew clean
-lint:
-	./gradlew checkstyleMain
+
+build:
+	./gradlew clean build
+
+install:
+	./gradlew clean install
+
+run-dist:
+	./build/install/java-package/bin/java-package
+
+run:
+	./gradlew run
+
+test:
+	./gradlew test
+
 report:
 	./gradlew jacocoTestReport
+
+lint:
+	./gradlew checkstyleMain
+
+check-deps:
+	./gradlew dependencyUpdates -Drevision=release
+
+
+build-run: build run
+
 .PHONY: build
