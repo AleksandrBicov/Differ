@@ -1,5 +1,6 @@
 name: Build
 
+
 on:
   - push
   - pull_request
@@ -16,9 +17,14 @@ jobs:
           distribution: 'temurin'
       - uses: gradle/gradle-build-action@v3
         with:
-          gradle-version: 8.6
-      - name: Build with Gradle
-        uses: gradle/gradle-build-action@v2
+          gradle-version: 8.7
+      - run: ./gradlew checkstyleMain
+      - run: ./gradlew test
+      - name: Publish code coverage
+        uses: paambaati/codeclimate-action@v5.0.0
+        env:
+         CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
+         JACOCO_SOURCE_PATH: src/main/java
         with:
-          arguments: build
-          build-root-directory: app
+          coverageCommand: make report
+          coverageLocations: ${{github.workspace}}/build/reports/jacoco/test/jacocoTestReport.xml:jacoco
