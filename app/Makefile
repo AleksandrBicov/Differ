@@ -14,4 +14,6 @@ clean:
 	./gradlew clean
 lint:
 	./gradlew checkstyleMain
+report:
+	./gradlew jacocoTestReport
 .PHONY: build
