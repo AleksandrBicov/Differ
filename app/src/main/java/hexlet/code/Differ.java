@@ -28,11 +28,11 @@ public class Differ {
         return Formatter.format(format, diff);
     }
     //Метод для прохождения тестов хекслет
-    public static String generate(String filepath1, String filepath2,String format) throws IOException {
+    public static String generate(String filepath1, String filepath2, String format2) throws IOException {
         Map<String, Object> map1 = Parser.readFile(filepath1);
         Map<String, Object> map2 = Parser.readFile(filepath2);
         Map<String, Object[]> diff = compareMaps(map1, map2);
-        return Formatter.format(format, diff);
+        return Formatter.format(format2, diff);
     }
      /**
      * Сравнивает два Map и возвращает Map с различиями.
