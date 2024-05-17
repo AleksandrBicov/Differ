@@ -9,10 +9,6 @@ import java.util.TreeSet;
 public class Differ {
     private static String format;
 
-    public Differ() {
-        this.format = "stylish";
-    }
-
     public Differ(String format) {
         this.format = format;
     }
