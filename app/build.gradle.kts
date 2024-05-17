@@ -33,5 +33,6 @@ tasks.jacocoTestReport {
     }
 }
 tasks.test {
+    useJUnitPlatform()
     finalizedBy(tasks.jacocoTestReport)
 }
