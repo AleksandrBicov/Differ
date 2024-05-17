@@ -20,7 +20,7 @@ public class DifferTest {
         String expected = readExpectedResult("stylish.expected");
 
         Differ differ = new Differ("stylish");
-        String actual = differ.generateDiff(filepath1, filepath2);
+        String actual = differ.generate(filepath1, filepath2);
 
         assertEquals(expected, actual);
     }
@@ -32,7 +32,7 @@ public class DifferTest {
         String expected = readExpectedResult("plain.expected");
 
         Differ differ = new Differ("plain");
-        String actual = differ.generateDiff(filepath1, filepath2);
+        String actual = differ.generate(filepath1, filepath2);
 
         assertEquals(expected, actual);
     }
@@ -44,7 +44,7 @@ public class DifferTest {
         String expected = readExpectedResult("json.expected");
 
         Differ differ = new Differ("json");
-        String actual = differ.generateDiff(filepath1, filepath2);
+        String actual = differ.generate(filepath1, filepath2);
 
         assertEquals(expected, actual);
     }

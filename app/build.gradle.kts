@@ -1,7 +1,7 @@
 plugins {
     application
     checkstyle
-    id("jacoco")
+    jacoco
 }
 
 group = "hexlet.code"
@@ -28,6 +28,7 @@ dependencies {
 }
 
 tasks.jacocoTestReport {
+    dependsOn(tasks.test)
     reports {
         xml.required.set(true)
     }

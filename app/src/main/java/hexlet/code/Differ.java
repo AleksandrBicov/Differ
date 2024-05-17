@@ -25,7 +25,7 @@ public class Differ {
      * @return Отчет о различиях в виде строки.
      * @throws IOException Если возникает ошибка при чтении файлов.
      */
-    public String generateDiff(String filepath1, String filepath2) throws IOException {
+    public String generate(String filepath1, String filepath2) throws IOException {
         Map<String, Object> map1 = Parser.readFile(filepath1);
         Map<String, Object> map2 = Parser.readFile(filepath2);
         Map<String, Object[]> diff = compareMaps(map1, map2);
