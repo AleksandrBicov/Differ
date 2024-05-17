@@ -7,7 +7,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class Differ {
-    private String format;
+    private static String format;
 
     public Differ() {
         this.format = "stylish";
@@ -25,7 +25,7 @@ public class Differ {
      * @return Отчет о различиях в виде строки.
      * @throws IOException Если возникает ошибка при чтении файлов.
      */
-    public String generate(String filepath1, String filepath2) throws IOException {
+    public static String generate(String filepath1, String filepath2) throws IOException {
         Map<String, Object> map1 = Parser.readFile(filepath1);
         Map<String, Object> map2 = Parser.readFile(filepath2);
         Map<String, Object[]> diff = compareMaps(map1, map2);
@@ -41,7 +41,7 @@ public class Differ {
      *         - значение из первого Map
      *         - значение из второго Map
      */
-    private Map<String, Object[]> compareMaps(Map<String, Object> map1, Map<String, Object> map2) {
+    private static Map<String, Object[]> compareMaps(Map<String, Object> map1, Map<String, Object> map2) {
         // Проверяем значения Map на null
         // и если таковые встречаются заменяем их на String "null"
         map1.forEach((key, value) -> {
