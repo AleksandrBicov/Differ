@@ -29,7 +29,7 @@ public class App implements Callable<Integer> {
     @Override
     public final Integer call() {
         try {
-            String diff = Differ.generate(filepath1, filepath2);
+            String diff = Differ.generate(filepath1, filepath2, format);
             System.out.println(diff);
         } catch (IOException e) {
             System.err.println(e.getMessage());
