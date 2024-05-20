@@ -13,6 +13,9 @@ import java.util.concurrent.Callable;
         description = "Compares two configuration files and shows a difference.")
 
 public class App implements Callable<Integer> {
+    private static final int SUCCESS_EXIT_CODE = 0;
+    private static final int ERROR_EXIT_CODE = 1;
+
     @Parameters(index = "0", paramLabel = "filepath1", description = "path to first file")
     private String filepath1;
 
@@ -28,11 +31,11 @@ public class App implements Callable<Integer> {
         try {
             String diff = Differ.generate(filepath1, filepath2);
             System.out.println(diff);
-            return 0;
         } catch (IOException e) {
-            e.printStackTrace();
-            return 1;
+            System.err.println(e.getMessage());
+            return ERROR_EXIT_CODE;
         }
+        return SUCCESS_EXIT_CODE;
     }
 
     public static void main(String[] args) {
