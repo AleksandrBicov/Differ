@@ -24,6 +24,8 @@ public class Differ {
     public static String generate(String filepath1, String filepath2) throws IOException {
         Map<String, Object> map1 = Parser.readFile(filepath1);
         Map<String, Object> map2 = Parser.readFile(filepath2);
+        Formatter.notNull(map1);
+        Formatter.notNull(map2);
         Map<String, Object[]> diff = compareMaps(map1, map2);
         return Formatter.format(format, diff);
     }
@@ -31,6 +33,8 @@ public class Differ {
     public static String generate(String filepath1, String filepath2, String format2) throws IOException {
         Map<String, Object> map1 = Parser.readFile(filepath1);
         Map<String, Object> map2 = Parser.readFile(filepath2);
+        Formatter.notNull(map1);
+        Formatter.notNull(map2);
         Map<String, Object[]> diff = compareMaps(map1, map2);
         return Formatter.format(format2, diff);
     }
@@ -44,18 +48,6 @@ public class Differ {
      *         - значение из второго Map
      */
     private static Map<String, Object[]> compareMaps(Map<String, Object> map1, Map<String, Object> map2) {
-        // Проверяем значения Map на null
-        // и если таковые встречаются заменяем их на String "null"
-        map1.forEach((key, value) -> {
-            if (value == null) {
-                map1.put(key, "null");
-            }
-        });
-        map2.forEach((key, value) -> {
-            if (value == null) {
-                map2.put(key, "null");
-            }
-        });
         Map<String, Object[]> diff = new LinkedHashMap<>();
         // Объединяем ключи из обоих Map
         Set<String> allKeys = new TreeSet<>(map1.keySet());
