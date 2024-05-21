@@ -8,6 +8,10 @@ import hexlet.code.formatters.Stylish;
 import java.util.Map;
 
 public class Formatter {
+
+    // Это скороее костыль,если я пытаюсь обрабатывать после нахождения разницы то у меня попадают в вывод
+    // все значения которые стали null либо вообще null не попадает,
+    // как это исправить не понимаю
     public static void notNull(Map map) {
 
         map.forEach((key, value) -> {
@@ -16,6 +20,7 @@ public class Formatter {
             }
         });
     }
+
     public static String format(String format, Map<String, Object[]> diff) throws JsonProcessingException {
         switch (format) {
             case "plain":
