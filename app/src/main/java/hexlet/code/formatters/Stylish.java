@@ -1,5 +1,6 @@
 package hexlet.code.formatters;
 import java.util.Map;
+import java.util.Objects;
 
 public class Stylish {
 
@@ -27,9 +28,11 @@ public class Stylish {
                 sb.append("  - ").append(key).append(": ").append(value1).append("\n");
             } else if (value1.equals(value2)) { // Если значения совпадают
                 sb.append("    ").append(key).append(": ").append(value1).append("\n");
-            } else { // Если значения не совпадают
+            } else if (!Objects.equals(value1, value2)) { // Если значения не совпадают
                 sb.append("  - ").append(key).append(": ").append(value1).append("\n");
                 sb.append("  + ").append(key).append(": ").append(value2).append("\n");
+            } else {
+                throw new RuntimeException("Unknown status: " + key);
             }
         }
         return sb.toString();

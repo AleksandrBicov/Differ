@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.Objects;
 
 public class Differ {
     private static String format;
@@ -17,12 +18,12 @@ public class Differ {
      * Генерирует отчет о различиях между двумя файлами.
      *
      * @param filePath1 Путь к первому файлу.
-     * @param filePath2 Путь ко второму файлу.
+     * @param filepath2 Путь ко второму файлу.
      * @return Отчет о различиях в виде строки.
      * @throws IOException Если возникает ошибка при чтении файлов.
      */
-    public static String generate(String filePath1, String filePath2) throws IOException {
-        return generate(filePath1, filePath2, format);
+    public static String generate(String filePath1, String filepath2) throws IOException {
+        return generate(filePath1, filepath2, format);
     }
 
     public static String generate(String filepath1, String filepath2, String format2) throws IOException {
@@ -62,8 +63,10 @@ public class Differ {
             } else if (value1.equals(value2)) { // Если значения совпадают
                 diff.put(key, new Object[]{value1, value1});
 
-            } else { // Если значения не совпадают
+            } else if (!Objects.equals(value1, value2)) { // Если значения не совпадают
                 diff.put(key, new Object[]{value1, value2});
+            } else {
+                throw new RuntimeException("Unknown status: " + key);
             }
         }
 
