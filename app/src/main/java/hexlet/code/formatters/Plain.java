@@ -1,5 +1,6 @@
 package hexlet.code.formatters;
 
+import java.util.List;
 import java.util.Map;
 
 public class Plain {
@@ -28,12 +29,23 @@ public class Plain {
     }
 
     private static String formatValue(Object value) {
-        if (value instanceof Map || value instanceof Iterable) {
-            return "[complex value]";
-        } else if (value instanceof String) {
-            return "'" + value + "'";
-        } else {
-            return String.valueOf(value);
+    // если убираю костыль тесты падают
+        //expected
+        //Property 'default' was updated. From 'null' to [complex value]
+        //Property 'id' was updated. From 45 to 'null'
+        //actual
+        //Property 'default' was added with value: [complex value]
+        //Property 'id' was removed
+        if (value == null) {
+            return "null";
         }
+        if (value instanceof String) {
+            return "'" + value + "'";
+        }
+        if (value instanceof Map || value instanceof List) {
+            return "[complex value]";
+        }
+        // Тип результата всегда должен быть строкой.
+        return value.toString();
     }
 }
