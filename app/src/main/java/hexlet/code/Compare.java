@@ -16,8 +16,9 @@ public class Compare {
      *         - значение из первого Map
      *         - значение из второго Map
      */
-    static Map<String, Object[]> compareMaps(Map<String, Object> map1, Map<String, Object> map2) {
-        Map<String, Object[]> diff = new LinkedHashMap<>();
+    static Map<String, Status> compareMaps(Map<String, Object> map1, Map<String, Object> map2) {
+
+        Map<String, Status> diff = new LinkedHashMap<>();
         // Объединяем ключи из обоих Map
         Set<String> allKeys = new TreeSet<>(map1.keySet());
         allKeys.addAll(map2.keySet());
@@ -28,17 +29,16 @@ public class Compare {
 
             // Если значение отсутствует в первом Map
             if (value1 == null) {
-                diff.put(key, new Object[]{null, value2});
+                diff.put(key, new Status(Status.ADDED, null, value2));
 
             } else if (value2 == null) { // Если значение отсутствует во втором Map
-                diff.put(key, new Object[]{value1, null});
+                diff.put(key, new Status(Status.DELETED, value1, null));
 
             } else if (value1.equals(value2)) { // Если значения совпадают
-                diff.put(key, new Object[]{value1, value1});
+                diff.put(key, new Status(Status.UNCHANGED, value1, value1));
 
             } else if (!Objects.equals(value1, value2)) { // Если значения не совпадают
-                diff.put(key, new Object[]{value1, value2});
-
+                diff.put(key, new Status(Status.CHANGED, value1, value2));
             } else {
                 throw new RuntimeException("Unknown status: " + key);
             }

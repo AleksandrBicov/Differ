@@ -21,7 +21,7 @@ public class Formatter {
         });
     }
 
-    public static String format(String format, Map<String, Object[]> diff) throws JsonProcessingException {
+    public static String format(String format, Map<String, Status> diff) throws JsonProcessingException {
         switch (format) {
             case "plain":
                 return Plain.format(diff);

@@ -30,7 +30,7 @@ public class Differ {
         Map<String, Object> map2 = read(filepath2);
         Formatter.notNull(map1);
         Formatter.notNull(map2);
-        Map<String, Object[]> diff = Compare.compareMaps(map1, map2);
+        Map<String, Status> diff = Compare.compareMaps(map1, map2);
         return Formatter.format(format2, diff);
     }
 

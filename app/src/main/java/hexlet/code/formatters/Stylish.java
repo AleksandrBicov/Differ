@@ -1,38 +1,40 @@
 package hexlet.code.formatters;
+
+
+
+import hexlet.code.Status;
+
 import java.util.Map;
-import java.util.Objects;
 
 public class Stylish {
 
-    /**
-     * Форматирует диф в стиле "stylish".
-     *
-     * @param diff Диф между двумя Map, где ключ - это ключ из обоих Map, а значение - массив из двух элементов:
-     *             - значение из первого Map
-     *             - значение из второго Map
-     * @return Отформатированный диф в виде строки.
-     */
-    public static String stylish(Map<String, Object[]> diff) {
+    public static String stylish(Map<String, Status> diff) {
         StringBuilder sb = new StringBuilder();
 
         // Форматируем каждую пару ключ-значение
         for (var entry : diff.entrySet()) {
             String key = entry.getKey();
-            Object[] values = entry.getValue();
-            Object value1 = values[0];
-            Object value2 = values[1];
-            // Если значение отсутствует в первом Map
-            if (value1 == null) {
-                sb.append("  + ").append(key).append(": ").append(value2).append("\n");
-            } else if (value2 == null) { // Если значение отсутствует во втором Map
-                sb.append("  - ").append(key).append(": ").append(value1).append("\n");
-            } else if (value1.equals(value2)) { // Если значения совпадают
-                sb.append("    ").append(key).append(": ").append(value1).append("\n");
-            } else if (!Objects.equals(value1, value2)) { // Если значения не совпадают
-                sb.append("  - ").append(key).append(": ").append(value1).append("\n");
-                sb.append("  + ").append(key).append(": ").append(value2).append("\n");
-            } else {
-                throw new RuntimeException("Unknown status: " + key);
+            Status status = entry.getValue();
+            Object oldValue = status.getOldValue();
+            Object newValue = status.getNewValue();
+            String statusName = status.getStatusName();
+
+            switch (statusName) {
+                case Status.ADDED:
+                    sb.append("  + ").append(key).append(": ").append(newValue).append("\n");
+                    break;
+                case Status.DELETED:
+                    sb.append("  - ").append(key).append(": ").append(oldValue).append("\n");
+                    break;
+                case Status.UNCHANGED:
+                    sb.append("    ").append(key).append(": ").append(oldValue).append("\n");
+                    break;
+                case Status.CHANGED:
+                    sb.append("  - ").append(key).append(": ").append(oldValue).append("\n");
+                    sb.append("  + ").append(key).append(": ").append(newValue).append("\n");
+                    break;
+                default:
+                    throw new RuntimeException("Unknown status: " + statusName);
             }
         }
         return sb.toString();
