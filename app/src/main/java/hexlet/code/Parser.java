@@ -22,5 +22,14 @@ public class Parser {
         return mapper.readValue(content, new TypeReference<>() { });
     }
 
+    static Map<String, Object> getParser(String extension, String content) throws IOException {
+        if (extension.equals("json")) {
+            return parseJson(content);
+        } else if (extension.equals("yml") || extension.equals("yaml")) {
+            return parseYaml(content);
+        } else {
+            throw new IllegalArgumentException("Unsupported file format: " + extension);
+        }
+    }
 }
 

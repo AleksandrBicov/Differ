@@ -33,6 +33,7 @@ public class Differ {
         Map<String, Object[]> diff = Compare.compareMaps(map1, map2);
         return Formatter.format(format2, diff);
     }
+
     static Map<String, Object> read(String filepath) throws IOException {
         Path path = Paths.get("src", "main", "resources", filepath).toAbsolutePath();
         if (!Files.exists(path)) {
@@ -43,13 +44,7 @@ public class Differ {
 
         String extension = getDataFormat(filepath);
 
-        if (extension.equals("json")) {
-            return Parser.parseJson(content);
-        } else if (extension.equals("yml") || extension.equals("yaml")) {
-            return Parser.parseYaml(content);
-        } else {
-            throw new IllegalArgumentException("Unsupported file format: " + extension);
-        }
+        return Parser.getParser(extension, content);
     }
 
     private static String getDataFormat(String filepath) {
