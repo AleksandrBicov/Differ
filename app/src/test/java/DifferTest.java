@@ -19,9 +19,9 @@ public class DifferTest {
     }
     @BeforeAll
     public static void beforeAll() throws Exception {
-        resultJson = readExpectedResult("json.expected");
-        resultPlain = readExpectedResult("plain.expected");
-        resultStylish = readExpectedResult("stylish.expected");
+        resultJson = readExpectedResult("fixtures/json.expected");
+        resultPlain = readExpectedResult("fixtures/plain.expected");
+        resultStylish = readExpectedResult("fixtures/stylish.expected");
     }
     @Test
     public void testGenerateDiffDefaultJson() throws Exception {
