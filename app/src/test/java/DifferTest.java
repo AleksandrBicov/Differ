@@ -25,8 +25,8 @@ public class DifferTest {
     }
     @Test
     public void testGenerateDiffDefaultJson() throws Exception {
-        String filepath1 = "fixtures/file1.json";
-        String filepath2 = "fixtures/file2.json";
+        String filepath1 = "filepath1.json";
+        String filepath2 = "filepath2.json";
 
         Differ differ = new Differ("stylish");
         String actual = differ.generate(filepath1, filepath2);
@@ -36,8 +36,8 @@ public class DifferTest {
 
     @Test
     public void testGenerateDiffDefaultYml() throws Exception {
-        String filepath1 = "fixtures/file1.yml";
-        String filepath2 = "fixtures/file2.yml";
+        String filepath1 = "filepath1.yml";
+        String filepath2 = "filepath2.yml";
 
         Differ differ = new Differ("stylish");
         String actual = differ.generate(filepath1, filepath2);
@@ -47,8 +47,8 @@ public class DifferTest {
 
     @Test
     public void testGenerateDiffStylishJson() throws Exception {
-        String filepath1 = "fixtures/file1.json";
-        String filepath2 = "fixtures/file2.json";
+        String filepath1 = "filepath1.json";
+        String filepath2 = "filepath2.json";
 
         Differ differ = new Differ("stylish");
         String actual = differ.generate(filepath1, filepath2, "stylish");
@@ -58,8 +58,8 @@ public class DifferTest {
 
     @Test
     public void testGenerateDiffStylishYml() throws Exception {
-        String filepath1 = "fixtures/file1.yml";
-        String filepath2 = "fixtures/file2.yml";
+        String filepath1 = "filepath1.yml";
+        String filepath2 = "filepath2.yml";
 
         Differ differ = new Differ("stylish");
         String actual = differ.generate(filepath1, filepath2, "stylish");
@@ -69,8 +69,8 @@ public class DifferTest {
 
     @Test
     public void testGenerateDiffPlainJson() throws Exception {
-        String filepath1 = "fixtures/file1.json";
-        String filepath2 = "fixtures/file2.json";
+        String filepath1 = "filepath1.json";
+        String filepath2 = "filepath2.json";
 
         Differ differ = new Differ("plain");
         String actual = differ.generate(filepath1, filepath2);
@@ -80,8 +80,8 @@ public class DifferTest {
 
     @Test
     public void testGenerateDiffPlainYml() throws Exception {
-        String filepath1 = "fixtures/file1.yml";
-        String filepath2 = "fixtures/file2.yml";
+        String filepath1 = "filepath1.yml";
+        String filepath2 = "filepath2.yml";
 
         Differ differ = new Differ("plain");
         String actual = differ.generate(filepath1, filepath2);
@@ -91,8 +91,8 @@ public class DifferTest {
 
     @Test
     public void testGenerateDiffJson() throws Exception {
-        String filepath1 = "fixtures/file1.json";
-        String filepath2 = "fixtures/file2.json";
+        String filepath1 = "filepath1.json";
+        String filepath2 = "filepath2.json";
 
         Differ differ = new Differ("json");
         String actual = differ.generate(filepath1, filepath2);
@@ -102,8 +102,8 @@ public class DifferTest {
 
     @Test
     public void testGenerateDiffYml() throws Exception {
-        String filepath1 = "fixtures/file1.yml";
-        String filepath2 = "fixtures/file2.yml";
+        String filepath1 = "filepath1.yml";
+        String filepath2 = "filepath2.yml";
 
         Differ differ = new Differ("json");
         String actual = differ.generate(filepath1, filepath2);
