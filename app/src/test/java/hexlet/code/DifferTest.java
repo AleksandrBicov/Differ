@@ -1,4 +1,4 @@
-import hexlet.code.Differ;
+package hexlet.code;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
