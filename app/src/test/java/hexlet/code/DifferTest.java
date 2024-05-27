@@ -15,13 +15,14 @@ public class DifferTest {
     private static String resultStylish;
 
     private static String readExpectedResult(String filename) throws Exception {
-        return new String(Files.readAllBytes(Paths.get("src/test/resources", filename)));
+        return new String(Files.readAllBytes(Paths.get("src/test/resources/fixtures/", filename)));
     }
+
     @BeforeAll
     public static void beforeAll() throws Exception {
-        resultJson = readExpectedResult("fixtures/json.expected");
-        resultPlain = readExpectedResult("fixtures/plain.expected");
-        resultStylish = readExpectedResult("fixtures/stylish.expected");
+        resultJson = readExpectedResult("json.expected");
+        resultPlain = readExpectedResult("plain.expected");
+        resultStylish = readExpectedResult("stylish.expected");
     }
     @Test
     public void testGenerateDiffDefaultJson() throws Exception {
