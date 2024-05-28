@@ -34,20 +34,35 @@ public class Differ {
         return Formatter.format(format2, diff);
     }
 
-    static Map<String, Object> read(String filepath) throws IOException {
-        Path path = Paths.get("src", "main", "resources", filepath).toAbsolutePath();
-        if (!Files.exists(path)) {
-            path = Paths.get("src", "test", "resources", "fixtures", filepath).toAbsolutePath();
-            if (!Files.exists(path)) {
-                throw new IOException("File not found: " + filepath);
-            }
+    private static Path getFullPath(String filePath) {
+        return Paths.get(filePath).toAbsolutePath().normalize();
+    }
+
+    static Map<String, Object> read(String filePath) throws IOException {
+        Path fullPath = getFullPath(filePath);
+
+        if (!Files.exists(fullPath)) {
+            throw new IOException("File '" + fullPath + "' does not exist");
         }
 
-        String content = new String(Files.readAllBytes(path));
+        String content = Files.readString(fullPath);
+        String dataFormat = getDataFormat(filePath);
 
-        String extension = getDataFormat(filepath);
+        return Parser.getParser(content, dataFormat);
 
-        return Parser.getParser(extension, content);
+//        Path path = Paths.get("src", "main", "resources", filepath).toAbsolutePath().normalize();
+//        if (!Files.exists(path)) {
+//            path = Paths.get(filepath).toAbsolutePath().normalize();
+//            if (!Files.exists(path)) {
+//                throw new IOException("File not found: " + filepath);
+//            }
+//        }
+//
+//        String content = new String(Files.readAllBytes(path));
+//
+//        String extension = getDataFormat(filepath);
+//
+//        return Parser.getParser(extension, content);
     }
 
     private static String getDataFormat(String filepath) {
