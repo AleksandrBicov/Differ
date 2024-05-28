@@ -36,7 +36,7 @@ public class Differ {
 
     static Map<String, Object> read(String filepath) throws IOException {
 
-        Path path = Paths.get("src", "main", "resources", filepath).toAbsolutePath().normalize();
+        Path path = Paths.get("src", "main", "resources", filepath).toAbsolutePath();
         if (!Files.exists(path)) {
             path = Paths.get(filepath).toAbsolutePath().normalize();
             if (!Files.exists(path)) {
