@@ -9,9 +9,6 @@ import java.util.Map;
 
 public class Formatter {
 
-    // Это скороее костыль,если я пытаюсь обрабатывать после нахождения разницы то у меня попадают в вывод
-    // все значения которые стали null либо вообще null не попадает,
-    // как это исправить не понимаю
     public static void notNull(Map map) {
 
         map.forEach((key, value) -> {
@@ -22,13 +19,10 @@ public class Formatter {
     }
 
     public static String format(String format, Map<String, Status> diff) throws JsonProcessingException {
-        switch (format) {
-            case "plain":
-                return Plain.format(diff);
-            case "json":
-                return JsonFormatter.format(diff);
-            default:
-                return Stylish.stylish(diff);
-        }
+        return switch (format) {
+            case "plain" -> Plain.format(diff);
+            case "json" -> JsonFormatter.format(diff);
+            default -> Stylish.stylish(diff);
+        };
     }
 }
