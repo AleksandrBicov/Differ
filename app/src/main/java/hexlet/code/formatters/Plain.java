@@ -57,7 +57,6 @@ public class Plain {
         if (value instanceof Map || value instanceof List) {
             return "[complex value]";
         }
-        // Тип результата всегда должен быть строкой.
         return value.toString();
     }
 }
