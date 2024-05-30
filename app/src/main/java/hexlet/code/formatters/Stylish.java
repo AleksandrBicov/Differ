@@ -10,6 +10,7 @@ public class Stylish {
 
     public static String stylish(Map<String, Status> diff) {
         StringBuilder sb = new StringBuilder();
+        sb.append("{\n");
         // Форматируем каждую пару ключ-значение
         for (var entry : diff.entrySet()) {
             String key = entry.getKey();
@@ -35,6 +36,7 @@ public class Stylish {
                     throw new RuntimeException("Unknown status: " + statusName);
             }
         }
+        sb.append("}");
         return sb.toString();
     }
 
