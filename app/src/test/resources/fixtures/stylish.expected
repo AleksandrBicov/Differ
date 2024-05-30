@@ -1,5 +1,5 @@
 {
-   chars1: [a, b, c]
+    chars1: [a, b, c]
   - chars2: [d, e, f]
   + chars2: false
   - checked: false
