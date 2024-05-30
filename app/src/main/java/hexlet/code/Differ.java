@@ -22,7 +22,7 @@ public class Differ {
      * @throws IOException Если возникает ошибка при чтении файлов.
      */
     public static String generate(String filePath1, String filepath2) throws IOException {
-        return generate(filePath1, filepath2, format);
+        return generate(filePath1, filepath2, "stylish");
     }
 
     public static String generate(String filepath1, String filepath2, String format2) throws IOException {

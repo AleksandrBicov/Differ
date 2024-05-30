@@ -39,15 +39,7 @@ public class Plain {
     }
 
     private static String formatValue(Object value) {
-
-        // если убираю костыль тесты падают
-        //expected
-        //Property 'default' was updated. From 'null' to [complex value]
-        //Property 'id' was updated. From 45 to 'null'
-        //actual
-        //Property 'default' was added with value: [complex value]
-        //Property 'id' was removed
-
+        
         if (value == null) {
             return "null";
         }
