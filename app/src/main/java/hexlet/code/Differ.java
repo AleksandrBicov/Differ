@@ -9,10 +9,6 @@ import java.util.Map;
 public class Differ {
     private static String format;
 
-//    public Differ(String format) {
-//        this.format = format;
-//    }
-
     /**
      * Генерирует отчет о различиях между двумя файлами.
      *
