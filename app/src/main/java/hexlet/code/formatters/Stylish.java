@@ -10,7 +10,7 @@ public class Stylish {
 
     public static String stylish(Map<String, Status> diff) {
         StringBuilder sb = new StringBuilder();
-        sb.append("{\n ");
+        sb.append("{\n");
         // Форматируем каждую пару ключ-значение
         for (var entry : diff.entrySet()) {
             String key = entry.getKey();
@@ -26,7 +26,7 @@ public class Stylish {
                     sb.append("  - ").append(key).append(": ").append(formatValue(oldValue)).append("\n");
                     break;
                 case Status.UNCHANGED:
-                    sb.append("   ").append(key).append(": ").append(formatValue(oldValue)).append("\n");
+                    sb.append("    ").append(key).append(": ").append(formatValue(oldValue)).append("\n");
                     break;
                 case Status.CHANGED:
                     sb.append("  - ").append(key).append(": ").append(formatValue(oldValue)).append("\n");
