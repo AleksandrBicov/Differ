@@ -24,8 +24,6 @@ public class Differ {
     public static String generate(String filepath1, String filepath2, String format2) throws IOException {
         Map<String, Object> map1 = read(filepath1);
         Map<String, Object> map2 = read(filepath2);
-        Formatter.notNull(map1);
-        Formatter.notNull(map2);
         Map<String, Status> diff = Compare.compareMaps(map1, map2);
         return Formatter.format(format2, diff);
     }
