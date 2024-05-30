@@ -20,11 +20,9 @@ public class JsonFormatter {
             Status status = entry.getValue();
 
             if (status.getStatusName().equals("unchanged")) {
-                formattedDiff.put(key,
-                        Arrays.asList(formatValue(status.getOldValue()), formatValue(status.getOldValue())));
+                formattedDiff.put(key, Arrays.asList(status.getOldValue(), status.getOldValue()));
             } else {
-                formattedDiff.put(key,
-                        Arrays.asList(formatValue(status.getOldValue()), formatValue(status.getNewValue())));
+                formattedDiff.put(key, Arrays.asList(status.getOldValue(), status.getNewValue()));
             }
         }
         return mapper.writeValueAsString(formattedDiff);
