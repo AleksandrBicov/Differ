@@ -27,7 +27,7 @@ public class Stylish {
                     sb.append("  - ").append(key).append(": ").append(oldValue).append("\n");
                     break;
                 case Status.UNCHANGED:
-                    sb.append("    ").append(key).append(": ").append(oldValue).append("\n");
+                    sb.append("   ").append(key).append(": ").append(oldValue).append("\n");
                     break;
                 case Status.CHANGED:
                     sb.append("  - ").append(key).append(": ").append(oldValue).append("\n");
