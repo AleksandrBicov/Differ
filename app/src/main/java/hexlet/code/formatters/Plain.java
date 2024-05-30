@@ -39,7 +39,7 @@ public class Plain {
     }
 
     private static String formatValue(Object value) {
-        
+
         if (value == null) {
             return "null";
         }
