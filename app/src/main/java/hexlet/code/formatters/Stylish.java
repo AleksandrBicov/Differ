@@ -10,7 +10,6 @@ public class Stylish {
 
     public static String stylish(Map<String, Status> diff) {
         StringBuilder sb = new StringBuilder();
-    //    sb.append("");
         // Форматируем каждую пару ключ-значение
         for (var entry : diff.entrySet()) {
             String key = entry.getKey();
@@ -20,17 +19,17 @@ public class Stylish {
             String statusName = status.getStatusName();
             switch (statusName) {
                 case Status.ADDED:
-                    sb.append("  + ").append(key).append(": ").append(newValue).append("\n");
+                    sb.append("  + ").append(key).append(": ").append(formatValue(newValue)).append("\n");
                     break;
                 case Status.DELETED:
-                    sb.append("  - ").append(key).append(": ").append(oldValue).append("\n");
+                    sb.append("  - ").append(key).append(": ").append(formatValue(oldValue)).append("\n");
                     break;
                 case Status.UNCHANGED:
-                    sb.append("    ").append(key).append(": ").append(oldValue).append("\n");
+                    sb.append("   ").append(key).append(": ").append(formatValue(oldValue)).append("\n");
                     break;
                 case Status.CHANGED:
-                    sb.append("  - ").append(key).append(": ").append(oldValue).append("\n");
-                    sb.append("  + ").append(key).append(": ").append(newValue).append("\n");
+                    sb.append("  - ").append(key).append(": ").append(formatValue(oldValue)).append("\n");
+                    sb.append("  + ").append(key).append(": ").append(formatValue(newValue)).append("\n");
                     break;
                 default:
                     throw new RuntimeException("Unknown status: " + statusName);
