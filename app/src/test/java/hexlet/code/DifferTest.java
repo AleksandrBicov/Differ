@@ -90,26 +90,26 @@ public class DifferTest {
         assertEquals(resultPlain, actual);
     }
 
-//    @Test
-//    public void testGenerateDiffJson() throws Exception {
-//        String filepath1 = "src/test/resources/fixtures/file1.json";
-//        String filepath2 = "src/test/resources/fixtures/file2.json";
-//
-//        Differ differ = new Differ();
-//        String actual = differ.generate(filepath1, filepath2, "json");
-//
-//        assertEquals(resultJson, actual);
-//    }
-//
-//    @Test
-//    public void testGenerateDiffYml() throws Exception {
-//        String filepath1 = "src/test/resources/fixtures/file1.yml";
-//        String filepath2 = "src/test/resources/fixtures/file2.yml";
-//
-//        Differ differ = new Differ();
-//        String actual = differ.generate(filepath1, filepath2, "json");
-//
-//        assertEquals(resultJson, actual);
-//    }
+    @Test
+    public void testGenerateDiffJson() throws Exception {
+        String filepath1 = "src/test/resources/fixtures/file1.json";
+        String filepath2 = "src/test/resources/fixtures/file2.json";
+
+        Differ differ = new Differ();
+        String actual = differ.generate(filepath1, filepath2, "json");
+
+        assertEquals(resultJson, actual);
+    }
+
+    @Test
+    public void testGenerateDiffYml() throws Exception {
+        String filepath1 = "src/test/resources/fixtures/file1.yml";
+        String filepath2 = "src/test/resources/fixtures/file2.yml";
+
+        Differ differ = new Differ();
+        String actual = differ.generate(filepath1, filepath2, "json");
+
+        assertEquals(resultJson, actual);
+    }
 }
 

@@ -1,7 +1,5 @@
 package hexlet.code.formatters;
 
-
-
 import hexlet.code.Status;
 
 import java.util.Map;
@@ -15,9 +13,10 @@ public class Stylish {
         for (var entry : diff.entrySet()) {
             String key = entry.getKey();
             Status status = entry.getValue();
-            Object oldValue = status.getOldValue();
-            Object newValue = status.getNewValue();
+            var oldValue = status.getOldValue();
+            var newValue = status.getNewValue();
             String statusName = status.getStatusName();
+
             switch (statusName) {
                 case Status.ADDED:
                     sb.append("  + ").append(key).append(": ").append(formatValue(newValue)).append("\n");

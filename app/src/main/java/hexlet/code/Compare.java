@@ -28,13 +28,13 @@ public class Compare {
             Object value2 = map2.get(key);
 
             // Если значение отсутствует в первом Map
-            if (value1 == null) {
-                diff.put(key, new Status(Status.ADDED, null, value2));
+            if (!map1.containsKey(key)) {
+                diff.put(key, new Status (Status.ADDED, null, value2));
 
-            } else if (value2 == null) { // Если значение отсутствует во втором Map
+            } else if (!map2.containsKey(key)) { // Если значение отсутствует во втором Map
                 diff.put(key, new Status(Status.DELETED, value1, null));
 
-            } else if (value1.equals(value2)) { // Если значения совпадают
+            } else if (Objects.equals(value1, value2)) { // Если значения совпадают
                 diff.put(key, new Status(Status.UNCHANGED, value1, value1));
 
             } else if (!Objects.equals(value1, value2)) { // Если значения не совпадают
