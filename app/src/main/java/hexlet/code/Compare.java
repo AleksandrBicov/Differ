@@ -29,7 +29,7 @@ public class Compare {
 
             // Если значение отсутствует в первом Map
             if (!map1.containsKey(key)) {
-                diff.put(key, new Status (Status.ADDED, null, value2));
+                diff.put(key, new Status(Status.ADDED, null, value2));
 
             } else if (!map2.containsKey(key)) { // Если значение отсутствует во втором Map
                 diff.put(key, new Status(Status.DELETED, value1, null));
