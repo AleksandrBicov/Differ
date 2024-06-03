@@ -29,8 +29,7 @@ public class DifferTest {
         String filepath1 = "src/test/resources/fixtures/file1.json";
         String filepath2 = "src/test/resources/fixtures/file2.json";
 
-        Differ differ = new Differ();
-        String actual = differ.generate(filepath1, filepath2);
+        String actual = Differ.generate(filepath1, filepath2);
 
         assertEquals(resultStylish, actual);
     }
@@ -40,8 +39,7 @@ public class DifferTest {
         String filepath1 = "src/test/resources/fixtures/file1.yml";
         String filepath2 = "src/test/resources/fixtures/file2.yml";
 
-        Differ differ = new Differ();
-        String actual = differ.generate(filepath1, filepath2);
+        String actual = Differ.generate(filepath1, filepath2);
 
         assertEquals(resultStylish, actual);
     }
@@ -51,8 +49,7 @@ public class DifferTest {
         String filepath1 = "src/test/resources/fixtures/file1.json";
         String filepath2 = "src/test/resources/fixtures/file2.json";
 
-        Differ differ = new Differ();
-        String actual = differ.generate(filepath1, filepath2, "stylish");
+        String actual = Differ.generate(filepath1, filepath2, "stylish");
 
         assertEquals(resultStylish, actual);
     }
@@ -62,8 +59,7 @@ public class DifferTest {
         String filepath1 = "src/test/resources/fixtures/file1.yml";
         String filepath2 = "src/test/resources/fixtures/file2.yml";
 
-        Differ differ = new Differ();
-        String actual = differ.generate(filepath1, filepath2, "stylish");
+        String actual = Differ.generate(filepath1, filepath2, "stylish");
 
         assertEquals(resultStylish, actual);
     }
@@ -73,8 +69,7 @@ public class DifferTest {
         String filepath1 = "src/test/resources/fixtures/file1.json";
         String filepath2 = "src/test/resources/fixtures/file2.json";
 
-        Differ differ = new Differ();
-        String actual = differ.generate(filepath1, filepath2, "plain");
+        String actual = Differ.generate(filepath1, filepath2, "plain");
 
         assertEquals(resultPlain, actual);
     }
@@ -84,8 +79,7 @@ public class DifferTest {
         String filepath1 = "src/test/resources/fixtures/file1.yml";
         String filepath2 = "src/test/resources/fixtures/file2.yml";
 
-        Differ differ = new Differ();
-        String actual = differ.generate(filepath1, filepath2, "plain");
+        String actual = Differ.generate(filepath1, filepath2, "plain");
 
         assertEquals(resultPlain, actual);
     }
@@ -95,8 +89,7 @@ public class DifferTest {
         String filepath1 = "src/test/resources/fixtures/file1.json";
         String filepath2 = "src/test/resources/fixtures/file2.json";
 
-        Differ differ = new Differ();
-        String actual = differ.generate(filepath1, filepath2, "json");
+        String actual = Differ.generate(filepath1, filepath2, "json");
 
         assertEquals(resultJson, actual);
     }
@@ -106,8 +99,7 @@ public class DifferTest {
         String filepath1 = "src/test/resources/fixtures/file1.yml";
         String filepath2 = "src/test/resources/fixtures/file2.yml";
 
-        Differ differ = new Differ();
-        String actual = differ.generate(filepath1, filepath2, "json");
+        String actual = Differ.generate(filepath1, filepath2, "json");
 
         assertEquals(resultJson, actual);
     }
