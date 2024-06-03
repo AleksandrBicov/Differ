@@ -7,7 +7,6 @@ import java.nio.file.Paths;
 import java.util.Map;
 
 public class Differ {
-    private static String format;
 
     /**
      * Генерирует отчет о различиях между двумя файлами.
