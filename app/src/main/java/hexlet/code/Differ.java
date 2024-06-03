@@ -36,7 +36,7 @@ public class Differ {
         }
 
 
-        String content = new String(Files.readAllBytes(path));
+        String content = new String(Files.readString(path));
 
         String extension = getDataFormat(filepath);
 
