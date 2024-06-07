@@ -28,7 +28,7 @@ public class Parser {
         } else if (format.equals("yml") || format.equals("yaml")) {
             return parseYaml(content);
         } else {
-            throw new IllegalArgumentException("Unsupported file format: " + format);
+            throw new IllegalArgumentException("Unsupported format: " + format);
         }
     }
 }
