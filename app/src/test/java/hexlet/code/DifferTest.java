@@ -14,8 +14,8 @@ public class DifferTest {
     private static String resultPlain;
     private static String resultStylish;
 
-    private static String readExpectedResult(String filename) throws Exception {
-        return new String(Files.readString(Paths.get("src/test/resources/fixtures/", filename)));
+    private static String readExpectedResult(String formatName) throws Exception {
+        return new String(Files.readString(Paths.get("src/test/resources/fixtures/", formatName)));
     }
 
     @BeforeAll
