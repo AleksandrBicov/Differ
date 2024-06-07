@@ -35,20 +35,18 @@ public class Differ {
         }
 
 
-        String content = new String(Files.readString(path));
+        String content = Files.readString(path);
 
         String extension = getDataFormat(filepath);
 
         return Parser.getParser(extension, content);
     }
 
-    private static String getDataFormat(String filepath) {
-        int lastDotIndex = filepath.lastIndexOf('.');
-        if (lastDotIndex == -1) {
-            return "";
-        } else {
-            return filepath.substring(lastDotIndex + 1);
-        }
+    private static String getDataFormat(String filePath) {
+        int index = filePath.lastIndexOf('.');
+        return index > 0
+                ? filePath.substring(index + 1)
+                : "";
     }
 }
 
