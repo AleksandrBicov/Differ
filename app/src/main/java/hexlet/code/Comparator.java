@@ -6,7 +6,7 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.Objects;
 
-public class Compare {
+public class Comparator {
     /**
      * Сравнивает два Map и возвращает Map с различиями.
      *
